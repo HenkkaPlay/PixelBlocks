@@ -30,11 +30,11 @@
 <h1>Pixel Worlds</h1>
 <div id="menu">
     <input type="text" id="maanNimi" placeholder="Maan nimi">
-    <button onclick="liityMaa()">Luo maa / Liity maaan</button>
+    <button onclick="liityMaa()">Create a world / Join a world</button>
 </div>
 <canvas id="maailma" width="800" height="600"></canvas>
 <div id="tekstiKentta">
-    <input type="text" id="puhekuplaTeksti" placeholder="Kirjoita jotain...">
+    <input type="text" id="puhekuplaTeksti" placeholder="Write something...">
 </div>
 
 
@@ -64,7 +64,7 @@ var moveRight = false;
 function liityMaa() {
     var maanNimi = document.getElementById("maanNimi").value.trim();
     if (maanNimi === "") {
-        alert("Syötä maan nimi!");
+        alert("enter the name of the world!");
     } else {
         //alert("Liitytty maahan: " + maanNimi);
         document.getElementById("menu").style.display = "none";
