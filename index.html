@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pixel Worlds</title>
+    <title>Pixel Blocks</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,21 +23,55 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+        #loginButton { /* Lisätty uusi tyyli */
+            display: block;
+        }
+        #playingText { /* Lisätty uusi tyyli */
+            display: none;
+        }
     </style>
 </head>
 <body>
 
-<h1>Pixel Worlds</h1>
+    <style>
+        h1 {
+          color: red;
+        }
+      </style>
+
+<h1>Pixel Blocks</h1>
+<h1>Version: 1.0</h1>
 <div id="menu">
-    <input type="text" id="maanNimi" placeholder="Maan nimi">
+    <input type="text" id="maanNimi" placeholder="World name">
     <button onclick="liityMaa()">Create a world / Join a world</button>
 </div>
-<canvas id="maailma" width="800" height="600"></canvas>
+<canvas id="maailma" width="1220" height="600"></canvas>
 <div id="tekstiKentta">
     <input type="text" id="puhekuplaTeksti" placeholder="Write something...">
 </div>
 
+<!-- Lisätty uusi div Login-napille -->
+<div id="loginButton">
+    <button onclick="window.location.href='https://pixelblocksgame.pages.dev'">Login to Pixel Blocks</button>
+</div>
 
+<style>
+    .sijoiteltu-teksti {
+      position: absolute;
+      top: 100px; /* Y-koordinaatti */
+      left: 1300px; /* X-koordinaatti */
+    }
+  </style>
+  </head>
+  <body>
+  
+  <div class="sijoiteltu-teksti">
+    <h2>1. Press Esc to get to lobby <br> 2. Press enter to write <br> 3. Press A and D to move <br> 4. Press W to jump
+    </h2>
+  </div>
+  
+  </body>
+  
 <script>
 var canvas = document.getElementById("maailma");
 var ctx = canvas.getContext("2d");
@@ -64,7 +98,7 @@ var moveRight = false;
 function liityMaa() {
     var maanNimi = document.getElementById("maanNimi").value.trim();
     if (maanNimi === "") {
-        alert("enter the name of the world!");
+        alert("Enter the name of the world!");
     } else {
         //alert("Liitytty maahan: " + maanNimi);
         document.getElementById("menu").style.display = "none";
@@ -72,6 +106,10 @@ function liityMaa() {
         spawnUkkeli();
         canvas.style.display = "block";
         maahanLiittynyt = true;
+        // Lisätty näyttö Login-napille, kun käyttäjä on maassa
+        document.getElementById("loginButton").style.display = "block";
+        // Näytä pelissä oleva teksti
+        document.getElementById("playingText").style.display = "block";
     }
 }
 
@@ -189,17 +227,26 @@ function checkForeverLoop() {
 
 
 window.addEventListener("keydown", function(event) {
-    if (maahanLiittynyt) {
-        if (writingMessage == false) {
-            if (event.key === "a") {
+    const key = event.key.toLowerCase(); // Muuttaa painetun näppäimen pienen kirjaimen muotoon
+
+    if (maahanLiittynyt && !writingMessage) {
+        switch (key) {
+            case "a":
                 moveLeft = true;
-            } else if (event.key === "d") {
+                break;
+            case "d":
                 moveRight = true;
-            } else if (event.key === "w" && !ukkeli.hyppy) {
-                ukkeli.hyppy = true;
-                ukkeli.hyppyNopeus = -10;
-            }
+                break;
+            case "w":
+                if (!ukkeli.hyppy) {
+                    ukkeli.hyppy = true;
+                    ukkeli.hyppyNopeus = -10;
+                }
+                break;
         }
+    
+
+
 
         if (event.key === "Enter") {
             enterPainettu();
@@ -208,6 +255,9 @@ window.addEventListener("keydown", function(event) {
             document.getElementById("menu").style.display = "block";
             canvas.style.display = "none";
             maahanLiittynyt = false;
+            // Piilota Login-nappi ja pelissä oleva teksti
+            document.getElementById("loginButton").style.display = "none";
+            document.getElementById("playingText").style.display = "none";
         }
     }
 });
@@ -230,7 +280,7 @@ function animateMovement() {
     if (moveRight) {
         uusiX += speed;
     }
-
+    
     // Hyppylogiikka
     if (ukkeli.hyppy) {
         ukkeli.y += ukkeli.hyppyNopeus;
@@ -288,7 +338,7 @@ canvas.addEventListener("click", function(event) {
         if (x >= palikka.x && x <= palikka.x + palikka.leveys && y >= palikka.y && y <= palikka.y + palikka.korkeus) {
             ilma.push(palikka);
             maailma.splice(i, 1);
-            break;
+            break; 
         }
     }
     
