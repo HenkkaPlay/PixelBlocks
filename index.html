@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pixel Worlds</title>
+    <title>Pixel Blocks</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,16 +27,26 @@
 </head>
 <body>
 
-<h1>Pixel Worlds</h1>
+    <style>
+        h1 {
+          color: red;
+        }
+      </style>
+
+<h1>Pixel Blocks</h1>
+<h1>Version: 1.0</h1>
 <div id="menu">
-    <input type="text" id="maanNimi" placeholder="Maan nimi">
+    <input type="text" id="maanNimi" placeholder="World name">
     <button onclick="liityMaa()">Create a world / Join a world</button>
 </div>
-<canvas id="maailma" width="800" height="600"></canvas>
+<canvas id="maailma" width="1520" height="600"></canvas>
 <div id="tekstiKentta">
     <input type="text" id="puhekuplaTeksti" placeholder="Write something...">
 </div>
 
+<body>
+    <button onclick="window.location.href"><a href="https://pixelblocksgame.pages.dev">Login to Pixel Blocks</a></button>
+  </body>
 
 <script>
 var canvas = document.getElementById("maailma");
@@ -64,7 +74,7 @@ var moveRight = false;
 function liityMaa() {
     var maanNimi = document.getElementById("maanNimi").value.trim();
     if (maanNimi === "") {
-        alert("enter the name of the world!");
+        alert("Enter the name of the world!");
     } else {
         //alert("Liitytty maahan: " + maanNimi);
         document.getElementById("menu").style.display = "none";
@@ -230,7 +240,7 @@ function animateMovement() {
     if (moveRight) {
         uusiX += speed;
     }
-
+    
     // Hyppylogiikka
     if (ukkeli.hyppy) {
         ukkeli.y += ukkeli.hyppyNopeus;
@@ -288,7 +298,7 @@ canvas.addEventListener("click", function(event) {
         if (x >= palikka.x && x <= palikka.x + palikka.leveys && y >= palikka.y && y <= palikka.y + palikka.korkeus) {
             ilma.push(palikka);
             maailma.splice(i, 1);
-            break;
+            break; 
         }
     }
     
@@ -321,3 +331,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+
