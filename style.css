@@ -1,1 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
 
+#menu {
+    margin-top: 100px;
+}
+
+canvas {
+    border: 1px solid black;
+    display: none;
+}
+
+#tekstiKentta {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#loginButton { 
+    display: block;
+}
+
+#playingText { 
+    display: none;
+}
+
+.sijoiteltu-teksti {
+    position: absolute;
+    top: 100px; 
+    left: 1300px; 
+  }
+
+  h1 {
+    color: red;
+  }
+
+  
