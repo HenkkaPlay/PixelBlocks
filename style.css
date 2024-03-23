@@ -38,4 +38,18 @@ canvas {
     color: red;
   }
 
+  h2 {
+    color: black;
+    top: 250px;
+    left: 200px;
+
+  }
+
+  h3 {
+     top: 50px;
+     left: 1300px;
+  }
+
   
+
+
